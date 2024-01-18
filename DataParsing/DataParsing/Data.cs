@@ -5,9 +5,9 @@ namespace DataParsing
     class Data
     {
         public string date {  get; set; }
-        public double utcToUt1 {  get; set; }
-        public double xpolar { get; set; }
-        public double ypolar { get; set; }
-        public double lod {  get; set; }
+        public double utcToUt1Ms {  get; set; }
+        public double xpolarS { get; set; }
+        public double ypolarS { get; set; }
+        public double lodMs {  get; set; }
     }
 }

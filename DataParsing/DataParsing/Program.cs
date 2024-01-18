@@ -68,10 +68,10 @@ namespace DataParsing
                 Data newData = new Data
                 {
                     date = dateNow.ToString("yyyy-MM-ddTHH:mm:ssZ"),
-                    utcToUt1 = double.Parse(todayData[6]),
-                    xpolar = double.Parse(todayData[4]),
-                    ypolar = double.Parse(todayData[5]),
-                    lod = double.Parse(todayData[7])
+                    utcToUt1Ms = double.Parse(todayData[6]),
+                    xpolarS = double.Parse(todayData[4]),
+                    ypolarS = double.Parse(todayData[5]),
+                    lodMs = double.Parse(todayData[7])
                 };
 
                 var options = new JsonSerializerOptions { WriteIndented = true };
