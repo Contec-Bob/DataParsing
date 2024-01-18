@@ -9,43 +9,44 @@ namespace DataParsing
     {
         static void Main(string[] args)
         {
-            string path = "https://celestrak.org/SpaceData/EOP-All.txt";
-
-            using WebClient client = new WebClient();
-
-            using Stream stream = client.OpenRead(path);
-
-            using StreamReader reader = new StreamReader(stream);
-
-            string spaceData = reader.ReadToEnd();
-
             DateTime dateNow = DateTime.UtcNow;
-            string folderPath = "json";
-            string savedPath = @"json\"+dateNow.ToString("yyyyMMdd")+".json";
+            string savedPath = @"json\"+dateNow.ToString("yyyyMMdd")+ ".json";
 
-            bool fileExit = false;
+            //json 폴더의 디렉토리 읽어서 오늘 생성된 파일 있는지 확인
+            //string folderPath = "json";
+            //bool fileExit = false;
+            //DirectoryInfo dir = new DirectoryInfo(folderPath);
+            //foreach(FileInfo file in dir.GetFiles())
+            //{
+            //    if(file.CreationTime.ToString("yyyyMMdd") == dateNow.ToString("yyyyMMdd"))
+            //        fileExit = true;
+            //}
 
-            DirectoryInfo dir = new DirectoryInfo(folderPath);
-            foreach(FileInfo file in dir.GetFiles())
-            {
-                if(file.CreationTime.ToString("yyyyMMdd") == dateNow.ToString("yyyyMMdd"))
-                    fileExit = true;
-            }
-
-            if(fileExit)
-            {
-                string savedJson = File.ReadAllText(savedPath);
-                Console.WriteLine(savedJson);
-            }
-
-            //if (File.Exists(savedPath))
+            //if(fileExit)
             //{
             //    string savedJson = File.ReadAllText(savedPath);
             //    Console.WriteLine(savedJson);
             //}
 
+            if (File.Exists(savedPath))
+            {
+                string savedJson = File.ReadAllText(savedPath);
+                Console.WriteLine(savedJson);
+            }
+
             else
             {
+
+                string path = "https://celestrak.org/SpaceData/EOP-All.txt";
+
+                using WebClient client = new WebClient();
+
+                using Stream stream = client.OpenRead(path);
+
+                using StreamReader reader = new StreamReader(stream);
+
+                string spaceData = reader.ReadToEnd();
+
                 int index = spaceData.IndexOf(dateNow.ToString("yyyy MM dd"));
                 string[] todayData = spaceData.Substring(index, 104).Split(" ", StringSplitOptions.RemoveEmptyEntries);
 
@@ -66,6 +67,7 @@ namespace DataParsing
 
                 Data newData = new Data
                 {
+                    date = dateNow.ToString("yyyyMMdd"),
                     utcToUt1 = double.Parse(todayData[6]),
                     xpolar = double.Parse(todayData[4]),
                     ypolar = double.Parse(todayData[5]),
