@@ -67,7 +67,7 @@ namespace DataParsing
 
                 Data newData = new Data
                 {
-                    date = dateNow.ToString("yyyyMMdd"),
+                    date = dateNow.ToString("yyyy-MM-ddTHH:mm:ssZ"),
                     utcToUt1 = double.Parse(todayData[6]),
                     xpolar = double.Parse(todayData[4]),
                     ypolar = double.Parse(todayData[5]),
