@@ -16,7 +16,7 @@ namespace TestProject
             Eop eop = new Eop();
 
             //Act
-            bool result = eop.IsExist();
+            bool result = eop.JsonIsExist();
 
             //Assert
             Assert.IsFalse(result);
@@ -30,7 +30,7 @@ namespace TestProject
 
             //Act
             eop.SaveToJson();
-            bool result = eop.IsExist();
+            bool result = eop.JsonIsExist();
 
             //Assert
             Assert.IsTrue(result);
